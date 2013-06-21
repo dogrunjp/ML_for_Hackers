@@ -8,14 +8,14 @@ library('tm')
 library('ggplot2')  
 library('plyr')  
 
- #ご自分の環境にあわせてwdを04-Rankingに設定してください。  
+ **#ご自分の環境にあわせてwdを04-Rankingに設定してください。**  
 getwd()  
 setwd("ML_for_Hackers-master/04-Ranking")  
  #グローバルパスの設定  
 data.path <- file.path("..", "03-Classification", "data")  
 easyham.path <- file.path(data.path, "easy_ham")  
 
- #msgの取得。encoding="latin1"→endoding="native.nec"→encodingオプション無しと諸説有り  
+ **#msgの取得。encoding="latin1"→endoding="native.nec"→encodingオプション無しと諸説有り**  
 msg.full <- function(path)  
 {  
   con <- file(path, open = "rt")  
@@ -88,8 +88,8 @@ date.converter <- function(dates, pattern1, pattern2)
   return(pattern1.convert)  
 }  
 
-  #POSIX形式の月の表記は日本語環境と英語環境で異なるため　　
-  #日本語環境対策にSys.setlocaleを下記のように設定します。
+  **#POSIX形式の月の表記は日本語環境と英語環境で異なるため**  
+  **#日本語環境対策にSys.setlocaleを下記のように設定します。**
 Sys.setlocale("LC_TIME","C") 
   
 pattern1 <- "%a, %d %b %Y %H:%M:%S"  
