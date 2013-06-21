@@ -3,7 +3,7 @@
 
 ***
 
-#Load libraries
+ #Load libraries
 library('tm')  
 library('ggplot2')  
 library('plyr')  
@@ -23,5 +23,51 @@ msg.full <- function(path)
   close(con)  
   return(msg)  
 }  
-
-
+  
+get.from <- function(msg.vec)  
+{  
+  from <- msg.vec[grepl("From: ", msg.vec)]  
+  from <- strsplit(from, '[":<> ]')[[1]]  
+  from <- from[which(from  != "" & from != " ")]  
+  return(from[grepl("@", from)][1])  
+}  
+  
+get.subject <- function(msg.vec)  
+{  
+  subj <- msg.vec[grepl("Subject: ", msg.vec)]  
+  if(length(subj) > 0)  
+  {  
+    return(strsplit(subj, "Subject: ")[[1]][2])  
+  }  
+  else  
+  {  
+    return("")  
+  }  
+}  
+  
+get.msg <- function(msg.vec)  
+{  
+  msg <- msg.vec[seq(which(msg.vec == "")[1] + 1, length(msg.vec), 1)]  
+  return(paste(msg, collapse = "\n"))  
+}  
+  
+get.date <- function(msg.vec)  
+{  
+  date.grep <- grepl("^Date: ", msg.vec)  
+  date.grep <- which(date.grep == TRUE)  
+  date <- msg.vec[date.grep[1]]  
+  date <- strsplit(date, "\\+|\\-|: ")[[1]][2]  
+  date <- gsub("^\\s+|\\s+$", "", date)  
+  return(strtrim(date, 25))  
+}  
+  
+parse.email <- function(path)  
+{  
+  full.msg <- msg.full(path)  
+  date <- get.date(full.msg)  
+  from <- get.from(full.msg)  
+  subj <- get.subject(full.msg)  
+  msg <- get.msg(full.msg)  
+  return(c(date, from, subj, msg, path))  
+}  
+  
