@@ -71,3 +71,34 @@ parse.email <- function(path)
   return(c(date, from, subj, msg, path))  
 }  
   
+easyham.docs <- dir(easyham.path)  
+easyham.docs <- easyham.docs[which(easyham.docs != "cmds")]  
+easyham.parse <- lapply(easyham.docs,  
+                        function(p) parse.email(file.path(easyham.path, p)))  
+
+ehparse.matrix <- do.call(rbind, easyham.parse)  
+allparse.df <- data.frame(ehparse.matrix, stringsAsFactors = FALSE)  
+names(allparse.df) <- c("Date", "From.EMail", "Subject", "Message", "Path")  
+  
+date.converter <- function(dates, pattern1, pattern2)  
+{  
+  pattern1.convert <- strptime(dates, pattern1)  
+  pattern2.convert <- strptime(dates, pattern2)  
+  pattern1.convert[is.na(pattern1.convert)] <- pattern2.convert[is.na(pattern1.convert)]  
+  return(pattern1.convert)  
+}  
+
+  #POSIX形式の月の表記は日本語環境と英語環境で異なるため
+  #日本語環境対策にSys.setlocaleを下記のように設定します。
+Sys.setlocale("LC_TIME","C") 
+  
+pattern1 <- "%a, %d %b %Y %H:%M:%S"  
+pattern2 <- "%d %b %Y %H:%M:%S"  
+  
+allparse.df$Date <- date.converter(allparse.df$Date, pattern1, pattern2)  
+  
+allparse.df$Subject <- tolower(allparse.df$Subject)  
+allparse.df$From.EMail <- tolower(allparse.df$From.EMail)  
+  
+priority.df <- allparse.df[with(allparse.df, order(Date)), ]  
+priority.train <- priority.df[1:(round(nrow(priority.df) / 2)), ]  
