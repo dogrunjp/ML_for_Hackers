@@ -88,7 +88,7 @@ date.converter <- function(dates, pattern1, pattern2)
   return(pattern1.convert)  
 }  
 
-  #POSIX形式の月の表記は日本語環境と英語環境で異なるため
+  #POSIX形式の月の表記は日本語環境と英語環境で異なるため　　
   #日本語環境対策にSys.setlocaleを下記のように設定します。
 Sys.setlocale("LC_TIME","C") 
   
