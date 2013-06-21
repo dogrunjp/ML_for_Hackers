@@ -1,6 +1,8 @@
 # 入門機械学習読書会　写経とwiki
 ## ４章　順位付け：優先トレイ
 
+***
+
 #Load libraries
 library('tm')
 library('ggplot2')
@@ -21,4 +23,5 @@ msg.full <- function(path)
   close(con)
   return(msg)
 }
+
 
