@@ -15,7 +15,7 @@ setwd("ML_for_Hackers-master/04-Ranking")
 data.path <- file.path("..", "03-Classification", "data")
 easyham.path <- file.path(data.path, "easy_ham")
 
-##msgの取得。encoding="latin1"→endoding="native.nec"→encodingオプション無しと諸説有り
+#msgの取得。encoding="latin1"→endoding="native.nec"→encodingオプション無しと諸説有り
 msg.full <- function(path)
 {
   con <- file(path, open = "rt")
