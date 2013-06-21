@@ -6,7 +6,7 @@ library('tm')
 library('ggplot2')
 library('plyr')
 
-#ご自分の環境にあわせてwdを04-Rankingに設定してください。
+　#ご自分の環境にあわせてwdを04-Rankingに設定してください。
 getwd()
 setwd("ML_for_Hackers-master/04-Ranking")
 #グローバルパスの設定
