@@ -128,12 +128,13 @@ ggplot(from.ex) +
   theme_bw() +  
   theme(axis.text.y = element_text(size = 5, hjust = 1))  
 
-
- #対数による重みつけをし、平坦化した電子メール受信数  
+ **#受け取ったメッセージの量による重み**
+ **#対数による尺度を平坦化した電子メール受信数による** 
 from.weight <- transform(from.weight,  
                          Weight = log(Freq + 1),  
                          log10Weight = log10(Freq + 1))  
-  
+　
+　**#図4-4電子メールの受信数およびlnとlog10変換**　  
 ggplot(from.weight, aes(x = 1:nrow(from.weight))) +  
   geom_line(aes(y = Weight, linetype = "ln")) +  
   geom_line(aes(y = log10Weight, linetype = "log10")) +  
