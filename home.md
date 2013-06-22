@@ -318,7 +318,7 @@ train.ranks.df$Rank <- as.numeric(train.ranks.df$Rank)
 
  **#優先メールのしきい値を計算**  
  **#na.rm = TRUEが無いとpriority.thresholdが欠損値になる**  
- **#ただし、このスクリプトで算出される値は本の中の値よりかない低くなります。**  
+ **#ただし、なぜかこのスクリプトで算出される値は本の中の値よりかなり低くなります。**  
 priority.threshold <- median(train.ranks.df$Rank, na.rm = TRUE)  
 train.ranks.df$Priority <- ifelse(train.ranks.df$Rank >= priority.threshold, 1, 0)  
 
