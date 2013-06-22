@@ -4,7 +4,7 @@
 ***
  **#※赤い数字[[1]]はマークダウンされてしまっているので、［［１］］に変えて読んでください**  
   　
- **#Load libraries ** 
+**#Load libraries ** 
 library('tm')  
 library('ggplot2')  
 library('plyr')  
