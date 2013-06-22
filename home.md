@@ -104,7 +104,7 @@ allparse.df$From.EMail <- tolower(allparse.df$From.EMail)
 priority.df <- allparse.df[with(allparse.df, order(Date)), ]  
 priority.train <- priority.df[1:(round(nrow(priority.df) / 2)), ]  
 
- **#重みつけ ** 
+ **#重みつけ **  
 priority.train$Date <- as.POSIXct(priority.train$Date)  
 from.weight <- ddply(priority.train, .(From.EMail),summarise, Freq=length(Subject))  
 from.weight <- from.weight[with(from.weight, order(Freq)), ] 
@@ -130,7 +130,7 @@ ggplot(from.ex) +
   theme(axis.text.y = element_text(size = 5, hjust = 1))  
 
  **#受け取ったメッセージの量による重み**
- **#対数による尺度を平坦化した電子メール受信数による** 
+ **#対数による尺度を平坦化した電子メール受信数による**  
 from.weight <- transform(from.weight,  
                          Weight = log(Freq + 1),  
                          log10Weight = log10(Freq + 1))  
