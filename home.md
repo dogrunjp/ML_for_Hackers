@@ -357,4 +357,5 @@ ggplot(subset(final.df, Type == "TRAINING"), aes(x = Rank)) +
   theme_bw()  
 
  **##この設定だとtest.ranks.df$Rankに大量に欠損値が発生します。**
+ **##日本語環境では、まだ問題があるサンプルです。** 
  **##関係していそうなencodingとSys.setlocaleの値を最適化することで多少変わるかもしれません。**
